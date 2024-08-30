@@ -21,10 +21,10 @@ export default function Home() {
     useEffect(() => {
         AsyncStorage.getItem('token')
             .then(
-                (banana) => {
+                (resp) => {
                     if (token != null) {
-                        console.log('Token Home:', banana)
-                        setToken(banana)
+                        console.log('Token Home:', resp)
+                        setToken(resp)
                     }
                 }
             )
@@ -59,12 +59,18 @@ export default function Home() {
         try {
             const response = await axios.post(
                 'http://127.0.0.1:8000/api/listarfilmes',
+                
                 {
                     titulo: filme,
                     genero: genero,
                     ano: ano,
                     classif: classif,
                     idioma: idioma
+                },
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             )
             console.log('Dados inseridos com sucesso...')
@@ -89,6 +95,11 @@ export default function Home() {
                     ano: anoG,
                     classif: classifG,
                     idioma: idiomaG
+                },
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             )
             console.log('Alterado com sucesso...')
@@ -100,7 +111,12 @@ export default function Home() {
     const apagar = async () => {
         try {
             const response = await axios.delete(
-                'http://127.0.0.1:8000/api/filme/' + id
+                'http://127.0.0.1:8000/api/filme/' + id, 
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                } 
             )
             console.log('Apagado com sucesso...')
             setFilmeG('')
