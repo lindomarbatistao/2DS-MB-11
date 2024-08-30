@@ -35,8 +35,8 @@ export default function Login({navigation}) {
                     password: password
                 }
             )
-            console.log(response.data)
-            setToken(response.data.access) 
+            console.log(response.data.access)
+            setToken(response.data.access)
             navigation.navigate('Home') 
         }
         catch(error){

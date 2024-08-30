@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, Pressable } from 'react-native';
+import { Text, View, TextInput, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import styles from './styles';
+import axios from 'axios';
 
 export default function Home() {
     const [id, setID] = useState('')
@@ -18,26 +18,31 @@ export default function Home() {
     const [idioma, setIdioma] = useState('')
     const [token, setToken] = useState('')
 
-    useEffect(()=>{
-        AsyncStorage.setItem('token', token)
+    useEffect(() => {
+        AsyncStorage.getItem('token')
             .then(
-                ()=>{
-                    if(token != null){
-                        console.log('Token Home:', token)
+                (banana) => {
+                    if (token != null) {
+                        console.log('Token Home:', banana)
+                        setToken(banana)
                     }
                 }
             )
             .catch(
-                (error)=>{
+                (error) => {
                     console.error('Erro ao salvar o token', error)
                 }
             )
-    },[token])
+    }, [])
 
     const capturar = async () => {
         try {
             const response = await axios.get(
-                'http://127.0.0.1:8000/api/filme/' + id
+                'http://127.0.0.1:8000/api/filme/' + id, {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
             )
             console.log(response.data)
             setFilmeG(response.data.titulo)
@@ -175,20 +180,12 @@ export default function Home() {
             </View>
 
             <View style={styles.stPost}>
-                <View style={{ flexDirection: 'row', padding: 10 }}>
-                    <Pressable
-                        style={styles.btnPo}
-                        onPress={enviar}
-                    >
-                        <Text style={{ fontWeight: 'bold', }}>POST</Text>
-                    </Pressable>
-                    <Pressable
-                        style={styles.btnPK}
-                        onPress={enviar}
-                    >
-                        <Text style={{ fontWeight: 'bold', }}>Token</Text>
-                    </Pressable>
-                </View>
+                <Pressable
+                    style={styles.btnPo}
+                    onPress={enviar}
+                >
+                    <Text style={{ fontWeight: 'bold', }}>POST</Text>
+                </Pressable>
                 <Text>Filme</Text>
                 <TextInput
                     value={filme}

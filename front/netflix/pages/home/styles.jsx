@@ -64,16 +64,6 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       marginLeft: 5
     },
-    btnPK: {
-      width: '20%',
-      height: 30,
-      backgroundColor: 'gray',
-      borderRadius: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 1,
-      marginLeft: 5
-    },
     btnDe: {
       width: '20%',
       height: 30,
