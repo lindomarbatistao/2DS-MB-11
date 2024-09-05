@@ -4,4 +4,6 @@ Semdente@2024
 careca@lisa
 Semdente@2024
 
-pip install djangorestframework-simplejwt
+lindomar@123
+Carambola#456
+

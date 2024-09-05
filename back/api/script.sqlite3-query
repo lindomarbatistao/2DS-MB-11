@@ -1,0 +1,47 @@
+-- database: ../db.sqlite3
+
+SELECT * FROM api_filmes;
+
+INSERT INTO api_filmes (titulo, genero, ano, idioma, classif)
+VALUES 
+    ('A Origem', 'Ficção Científica', '2010', 'Inglês', 'PG-13'),
+    ('Matrix', 'Ficção Científica', '1999', 'Inglês', 'R'),
+    ('Parasita', 'Suspense', '2019', 'Coreano', 'R'),
+    ('Interestelar', 'Ficção Científica', '2014', 'Inglês', 'PG-13'),
+    ('O Poderoso Chefão', 'Crime', '1972', 'Inglês', 'R'),
+    ('Pulp Fiction', 'Crime', '1994', 'Inglês', 'R'),
+    ('O Cavaleiro das Trevas', 'Ação', '2008', 'Inglês', 'PG-13'),
+    ('Clube da Luta', 'Drama', '1999', 'Inglês', 'R'),
+    ('Forrest Gump', 'Drama', '1994', 'Inglês', 'PG-13'),
+    ('Um Sonho de Liberdade', 'Drama', '1994', 'Inglês', 'R'),
+    ('Os Vingadores', 'Ação', '2012', 'Inglês', 'PG-13'),
+    ('O Senhor dos Anéis: A Sociedade do Anel', 'Fantasia', '2001', 'Inglês', 'PG-13'),
+    ('Gladiador', 'Ação', '2000', 'Inglês', 'R'),
+    ('O Rei Leão', 'Animação', '1994', 'Inglês', 'G'),
+    ('Avatar', 'Ficção Científica', '2009', 'Inglês', 'PG-13'),
+    ('Star Wars: Episódio IV - Uma Nova Esperança', 'Ficção Científica', '1977', 'Inglês', 'PG'),
+    ('Titanic', 'Romance', '1997', 'Inglês', 'PG-13'),
+    ('Os Infiltrados', 'Crime', '2006', 'Inglês', 'R'),
+    ('Coração Valente', 'Ação', '1995', 'Inglês', 'R'),
+    ('Amnésia', 'Suspense', '2000', 'Inglês', 'R'),
+    ('Oldboy', 'Suspense', '2003', 'Coreano', 'R');
+
+CREATE TABLE genero (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    genero VARCHAR(255)
+);
+
+INSERT INTO genero (genero) 
+VALUES 
+    ('Ficção Científica'),
+    ('Romance'),
+    ('Mistério'),
+    ('Fantasia'),
+    ('Terror'),
+    ('Histórico'),
+    ('Biografia'),
+    ('Aventura');
+
+UPDATE api_filmes
+SET genero = NULL;
+
