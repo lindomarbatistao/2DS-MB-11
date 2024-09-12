@@ -44,9 +44,13 @@ export default function Home() {
                     }
                 }
             )
+
+            const resp = await axios.get(
+                'http://127.0.0.1:8000/api/genero/' + id)
+
             console.log(response.data)
             setFilmeG(response.data.titulo)
-            setGeneroG(response.data.genero)
+            setGeneroG(resp.data.genre)
             setAnoG(response.data.ano)
             setClassifG(response.data.classif)
             setIdiomaG(response.data.idioma)
@@ -131,7 +135,7 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-
+            <View style={{padding:20}}>
             <View style={styles.stGet}>
                 <View style={{ flexDirection: 'row', padding: 10 }}>
                     <Text>ID:</Text>
@@ -234,7 +238,7 @@ export default function Home() {
                 />
             </View>
 
-
+            </View>
         </View>
     )
 }
