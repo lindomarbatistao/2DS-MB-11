@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios'
@@ -7,25 +7,7 @@ import styles from "./styles";
 export default function Login({navigation}) {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-    const [token, setToken] = useState('') 
-    const [mensagem, setMensagem] = useState('')
     
-    useEffect(()=>{
-        AsyncStorage.setItem('token', token)
-            .then(
-                ()=>{
-                    if(token != null){
-                        console.log('Token Login:', token)
-                    }
-                }
-            )
-            .catch(
-                (error)=>{
-                    console.error('Erro ao salvar o token', error)
-                }
-            )
-    },[token])
-
     const logar = async ()=>{
         try{
             const response = await axios.post(
@@ -35,8 +17,7 @@ export default function Login({navigation}) {
                     password: password
                 }
             )
-            console.log(response.data.access)
-            setToken(response.data.access)
+            AsyncStorage.setItem('token', response.data.access)
             navigation.navigate('Home') 
         }
         catch(error){

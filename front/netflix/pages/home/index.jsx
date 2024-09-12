@@ -19,9 +19,11 @@ export default function Home() {
     const [token, setToken] = useState('')
 
     useEffect(() => {
+        console.log("Token XXX", token)
         AsyncStorage.getItem('token')
             .then(
                 (resp) => {
+                    
                     if (token != null) {
                         console.log('Token Home:', resp)
                         setToken(resp)
@@ -39,10 +41,10 @@ export default function Home() {
         try {
             const response = await axios.get(
                 'http://127.0.0.1:8000/api/filme/' + id, {
-                    headers:{
-                        Authorization: `Bearer ${token}`
-                    }
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
+            }
             )
 
             const resp = await axios.get(
@@ -63,7 +65,7 @@ export default function Home() {
         try {
             const response = await axios.post(
                 'http://127.0.0.1:8000/api/listarfilmes',
-                
+
                 {
                     titulo: filme,
                     genero: genero,
@@ -72,7 +74,7 @@ export default function Home() {
                     idioma: idioma
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
@@ -101,7 +103,7 @@ export default function Home() {
                     idioma: idiomaG
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
@@ -115,12 +117,12 @@ export default function Home() {
     const apagar = async () => {
         try {
             const response = await axios.delete(
-                'http://127.0.0.1:8000/api/filme/' + id, 
+                'http://127.0.0.1:8000/api/filme/' + id,
                 {
-                    headers:{
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
-                } 
+                }
             )
             console.log('Apagado com sucesso...')
             setFilmeG('')
@@ -135,108 +137,108 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-            <View style={{padding:20}}>
-            <View style={styles.stGet}>
-                <View style={{ flexDirection: 'row', padding: 10 }}>
-                    <Text>ID:</Text>
+            <View style={{ padding: 20 }}>
+                <View style={styles.stGet}>
+                    <View style={{ flexDirection: 'row', padding: 10 }}>
+                        <Text>ID:</Text>
+                        <TextInput
+                            value={id}
+                            onChangeText={(e) => { setID(e) }}
+                            style={styles.caixaID}
+                        />
+                        <Pressable
+                            style={styles.btnGe}
+                            onPress={capturar}
+                        >
+                            <Text style={{ fontWeight: 'bold', }}>GET</Text>
+                        </Pressable>
+                        <Pressable
+                            style={styles.btnPu}
+                            onPress={atualizar}
+                        >
+                            <Text style={{ fontWeight: 'bold', }}>PUT</Text>
+                        </Pressable>
+                        <Pressable
+                            style={styles.btnDe}
+                            onPress={apagar}
+                        >
+                            <Text style={{ fontWeight: 'bold', }}>DEL</Text>
+                        </Pressable>
+                    </View>
+                    <Text>Filme</Text>
                     <TextInput
-                        value={id}
-                        onChangeText={(e) => { setID(e) }}
-                        style={styles.caixaID}
+                        style={styles.caixaGet}
+                        value={filmeG}
+                        onChangeText={(e) => setFilmeG(e)}
                     />
-                    <Pressable
-                        style={styles.btnGe}
-                        onPress={capturar}
-                    >
-                        <Text style={{ fontWeight: 'bold', }}>GET</Text>
-                    </Pressable>
-                    <Pressable
-                        style={styles.btnPu}
-                        onPress={atualizar}
-                    >
-                        <Text style={{ fontWeight: 'bold', }}>PUT</Text>
-                    </Pressable>
-                    <Pressable
-                        style={styles.btnDe}
-                        onPress={apagar}
-                    >
-                        <Text style={{ fontWeight: 'bold', }}>DEL</Text>
-                    </Pressable>
+
+                    <Text>Gênero</Text>
+                    <TextInput
+                        style={styles.caixaGet}
+                        value={generoG}
+                        onChangeText={(e) => setGeneroG(e)}
+                    />
+
+                    <Text>Ano</Text>
+                    <TextInput
+                        style={styles.caixaGet}
+                        value={anoG}
+                        onChangeText={(e) => setAnoG(e)}
+                    />
+
+                    <Text>Idioma</Text>
+                    <TextInput
+                        style={styles.caixaGet}
+                        value={idiomaG}
+                        onChangeText={(e) => setIdiomaG(e)}
+                    />
+
+                    <Text>Classificação</Text>
+                    <TextInput
+                        style={styles.caixaGet}
+                        value={classifG}
+                        onChangeText={(e) => setClassifG(e)}
+                    />
                 </View>
-                <Text>Filme</Text>
-                <TextInput
-                    style={styles.caixaGet}
-                    value={filmeG}
-                    onChangeText={(e) => setFilmeG(e)}
-                />
 
-                <Text>Gênero</Text>
-                <TextInput
-                    style={styles.caixaGet}
-                    value={generoG}
-                    onChangeText={(e) => setGeneroG(e)}
-                />
-
-                <Text>Ano</Text>
-                <TextInput
-                    style={styles.caixaGet}
-                    value={anoG}
-                    onChangeText={(e) => setAnoG(e)}
-                />
-
-                <Text>Idioma</Text>
-                <TextInput
-                    style={styles.caixaGet}
-                    value={idiomaG}
-                    onChangeText={(e) => setIdiomaG(e)}
-                />
-
-                <Text>Classificação</Text>
-                <TextInput
-                    style={styles.caixaGet}
-                    value={classifG}
-                    onChangeText={(e) => setClassifG(e)}
-                />
-            </View>
-
-            <View style={styles.stPost}>
-                <Pressable
-                    style={styles.btnPo}
-                    onPress={enviar}
-                >
-                    <Text style={{ fontWeight: 'bold', }}>POST</Text>
-                </Pressable>
-                <Text>Filme</Text>
-                <TextInput
-                    value={filme}
-                    onChangeText={(e) => { setFilme(e) }}
-                    style={styles.caixaPost}
-                />
-                <Text>Gênero</Text>
-                <TextInput
-                    value={genero}
-                    onChangeText={(e) => { setGenero(e) }}
-                    style={styles.caixaPost}
-                />
-                <Text>Ano</Text>
-                <TextInput
-                    value={ano}
-                    onChangeText={(e) => { setAno(e) }}
-                    style={styles.caixaPost}
-                />
-                <Text>Idioma</Text>
-                <TextInput
-                    value={idioma}
-                    onChangeText={(e) => { setIdioma(e) }}
-                    style={styles.caixaPost}
-                />
-                <Text>Classificação</Text>
-                <TextInput
-                    value={classif}
-                    onChangeText={(e) => { setClassif(e) }}
-                    style={styles.caixaPost}
-                />
-            </View>
+                <View style={styles.stPost}>
+                    <Pressable
+                        style={styles.btnPo}
+                        onPress={enviar}
+                    >
+                        <Text style={{ fontWeight: 'bold', }}>POST</Text>
+                    </Pressable>
+                    <Text>Filme</Text>
+                    <TextInput
+                        value={filme}
+                        onChangeText={(e) => { setFilme(e) }}
+                        style={styles.caixaPost}
+                    />
+                    <Text>Gênero</Text>
+                    <TextInput
+                        value={genero}
+                        onChangeText={(e) => { setGenero(e) }}
+                        style={styles.caixaPost}
+                    />
+                    <Text>Ano</Text>
+                    <TextInput
+                        value={ano}
+                        onChangeText={(e) => { setAno(e) }}
+                        style={styles.caixaPost}
+                    />
+                    <Text>Idioma</Text>
+                    <TextInput
+                        value={idioma}
+                        onChangeText={(e) => { setIdioma(e) }}
+                        style={styles.caixaPost}
+                    />
+                    <Text>Classificação</Text>
+                    <TextInput
+                        value={classif}
+                        onChangeText={(e) => { setClassif(e) }}
+                        style={styles.caixaPost}
+                    />
+                </View>
 
             </View>
         </View>
