@@ -21,7 +21,7 @@ export default function Home() {
   const [token, setToken] = useState("");
   const [base64, setBase64] = useState(null);
   const [imageName, setImageName] = useState(null)
-  const [imageSource, setImageSource] = useState('../../assets/favicon.png')
+  const [imageSource, setImageSource] = useState('')
 
   useEffect(() => {
     AsyncStorage.getItem("token")
