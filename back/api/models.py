@@ -13,6 +13,7 @@ class Filmes(models.Model):
     idioma = models.CharField(max_length=255)
     classif = models.CharField(max_length=255)
     
-
+class Imagem(models.Model):
+    imagem = models.ImageField(upload_to='capas/', blank=True, null=True)
 
 

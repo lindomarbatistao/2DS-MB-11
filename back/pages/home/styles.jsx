@@ -3,27 +3,54 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 20
+      paddingLeft:20,
+      paddingRight:20,
+      alignItems:'center',
+      justifyContent:'center',
+      backgroundColor:'#f2f2f0'
     },
     stGet: {
-      flex: 1,
+      // flex: 1,
+      padding:10,
+      height:'40%',
+      width:'100%',
+      marginTop:20
     },
     stPost: {
       flex: 1,
+      padding:10,
+      width:'100%', 
+      marginTop:20
     },
     caixaGet: {
       height: 30,
       borderRadius: 8,
       padding: 5,
       backgroundColor: 'grey',
-      width: '90%',
+      width: '100%',
+      marginBottom: 10
+    },
+    caixaGet2: {
+      height: 30,
+      borderRadius: 8,
+      padding: 5,
+      backgroundColor: 'grey',
+      width: '100%',
       marginBottom: 10
     },
     caixaPost: {
       height: 30,
       borderRadius: 8,
       padding: 5,
-      width: '90%',
+      width: '100%',
+      marginBottom: 10,
+      borderWidth: 1
+    },
+    caixaPost2: {
+      height: 30,
+      borderRadius: 8,
+      padding: 5,
+      width: '100%',
       marginBottom: 10,
       borderWidth: 1
     },
@@ -74,6 +101,27 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       marginLeft: 5
     },
+    foto01:{
+      width:'40%'
+    },
+    foto02:{
+      width: '50%', 
+      height: 150,
+      marginLeft: 20,
+      borderWidth:0.2,
+      borderColor:'#aaa',
+      marginTop:10,
+      alignItems:'center',
+      justifyContent:'center'
+    },
+    foto03:{
+      flexDirection: 'row'
+    },
+    foto04:{
+      width: 150, 
+      height: 150,  
+    },
+    
   })
 
   export default styles

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Filmes, Genero
+from .models import Filmes, Genero, Imagem
 
 class FilmesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,3 +12,7 @@ class GeneroSerializer(serializers.ModelSerializer):
         model = Genero
         fields = ['id', 'genre']
         
+class ImagemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Imagem
+        fields = ['id', 'imagem']
